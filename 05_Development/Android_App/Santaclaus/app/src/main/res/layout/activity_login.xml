@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="io.hackathon.santaclaus.LoginActivity">
+    tools:context="io.hackathon.santaclaus.activity.LoginActivity">
 
     <TextView
         android:layout_gravity="center"
@@ -58,13 +58,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_ok_button"
-            android:onClick="signup" />
+            android:onClick="login" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_signup_button"
-            android:onClick="login" />
+            android:onClick="signup" />
     </LinearLayout>
 
 </LinearLayout>

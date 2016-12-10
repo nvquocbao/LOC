@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="io.hackathon.santaclaus.SignUpActivity">
+    tools:context="io.hackathon.santaclaus.activity.SignUpActivity">
 
     <TextView
         android:layout_gravity="center"
@@ -98,6 +98,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signup_ok_button"/>
+        android:text="@string/signup_ok_button"
+        android:onClick="signup" />
 
 </LinearLayout>
