@@ -61,6 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ChildActivity.class);
                 startActivity(intent);
             }
+        } else {
+            TextView errorMsg = (TextView) findViewById(R.id.error_msg);
+            errorMsg.setText("ユーザ名、パスワードが間違っています。あるいはまだ登録されていない。");
         }
     }
 
