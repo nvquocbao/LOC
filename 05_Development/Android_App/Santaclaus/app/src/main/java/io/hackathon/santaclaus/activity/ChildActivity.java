@@ -38,7 +38,7 @@ public class ChildActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selectedUser = userList.get(position);
                 Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
-//                intent.putExtra("childId", selectedUser.getId() + "");
+                intent.putExtra("childId", selectedUser.getId() + "");
                 startActivity(intent);
             }
         });

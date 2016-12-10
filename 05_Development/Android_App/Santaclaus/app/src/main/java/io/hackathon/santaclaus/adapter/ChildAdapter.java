@@ -40,6 +40,7 @@ public class ChildAdapter extends ArrayAdapter<User> {
         final View rowView = inflater.inflate(R.layout.child_list, parent, false);
         User user = userList.get(position);
         ImageView avatarView = (ImageView) rowView.findViewById(R.id.avatar);
+        /*
         Uri uri = Uri.parse(user.getAvatarPath());
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
@@ -48,6 +49,7 @@ public class ChildAdapter extends ArrayAdapter<User> {
             // TODO: remove
             avatarView.setImageResource(R.drawable.user_avatar);
         }
+        */
         TextView nameView = (TextView) rowView.findViewById(R.id.name);
         nameView.setText(user.getName());
         return rowView;

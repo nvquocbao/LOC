@@ -59,7 +59,7 @@ public class SessionManager {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
-//        editor.putString(KEY_ID, user.getId() + "");
+        editor.putString(KEY_ID, user.getId() + "");
 
         // Storing name in pref
         editor.putString(KEY_NAME, user.getName());
@@ -102,7 +102,7 @@ public class SessionManager {
             return null;
         }
         User user = new User();
-//        user.setId(Utils.getIntegerValue(pref.getString(KEY_ID, null)));
+        user.setId(Utils.getIntegerValue(pref.getString(KEY_ID, null)));
         user.setName(pref.getString(KEY_NAME, null));
         user.setEmail(pref.getString(KEY_EMAIL, null));
         user.setPassword(pref.getString(KEY_PASSWORD, null));
