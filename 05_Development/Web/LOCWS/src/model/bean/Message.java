@@ -30,8 +30,11 @@ public class Message implements java.io.Serializable {
 	private User userByChildId;
 	private User userByParentId;
 	private String content;
+	private int childId;
+	private int parentId;
 	private Date createDate;
 	private Date updateDate;
+	private int isChild;
 
 	public Message() {
 	}
@@ -40,11 +43,12 @@ public class Message implements java.io.Serializable {
 		this.userByChildId = userByChildId;
 	}
 
-	public Message(User userByChildId, User userByParentId, String content,
+	public Message(User userByChildId, User userByParentId, String content, int childId, int parentId,
 			Date createDate, Date updateDate) {
 		this.userByChildId = userByChildId;
 		this.userByParentId = userByParentId;
-		this.content = content;
+		this.childId = childId;
+		this.parentId = parentId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
@@ -89,6 +93,24 @@ public class Message implements java.io.Serializable {
 		this.content = content;
 	}
 
+	@Column(name = "child_id")
+	public int getChildId() {
+		return childId;
+	}
+
+	public void setChildId(int childId) {
+		this.childId = childId;
+	}
+
+	@Column(name = "parent_id")
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "create_date", length = 10)
 	public Date getCreateDate() {
@@ -109,4 +131,12 @@ public class Message implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
+	@Column(name = "is_child")
+	public int getIsChild() {
+		return isChild;
+	}
+
+	public void setIsChild(int isChild) {
+		this.isChild = isChild;
+	}
 }

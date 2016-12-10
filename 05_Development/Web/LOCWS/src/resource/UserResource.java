@@ -48,6 +48,38 @@ public class UserResource {
 	}
 	
 	@GET
+	@Path("/getAllChild/{parentId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Output getAllChild(@PathParam("parentId") int parentId) {
+		Output output = null;
+		ArrayList<User> listUser = null;
+		try {
+			listUser = UserDAO.getAllChild(parentId);
+			output = new Output(Common.RESULT_OK, listUser);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
+		}
+		return output;
+	}
+	
+	@GET
+	@Path("/getParent/{childId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Output getParent(@PathParam("childId") int childId) {
+		Output output = null;
+		User user = null;
+		try {
+			user = UserDAO.getParent(childId);
+			output = new Output(Common.RESULT_OK, user);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
+		}
+		return output;
+	}
+	
+	@GET
 	@Path("/getById/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Output getUserById(@PathParam("id") int id) {
@@ -84,7 +116,6 @@ public class UserResource {
 		}
 		return output;
 	}
-
 
 	@POST
 	@Path("/create")
