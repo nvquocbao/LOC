@@ -3,15 +3,11 @@ package model.bean;
 // Generated 2016/12/10 13:51:52 by Hibernate Tools 4.3.1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,11 +30,9 @@ public class User implements java.io.Serializable {
 	private Date birthday;
 	private String avatarPath;
 	private String address;
-	private Boolean type;
+	private int type;
 	private Date createDate;
 	private Date updateDate;
-	private Set<Message> messagesForChildId = new HashSet<Message>(0);
-	private Set<Message> messagesForParentId = new HashSet<Message>(0);
 
 	public User() {
 	}
@@ -50,9 +44,8 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String email, String password, String name, Date birthday,
-			String avatarPath, String address, Boolean type, Date createDate,
-			Date updateDate, Set<Message> messagesForChildId,
-			Set<Message> messagesForParentId) {
+			String avatarPath, String address, int type, Date createDate,
+			Date updateDate) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -62,8 +55,6 @@ public class User implements java.io.Serializable {
 		this.type = type;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-		this.messagesForChildId = messagesForChildId;
-		this.messagesForParentId = messagesForParentId;
 	}
 
 	@Id
@@ -133,11 +124,11 @@ public class User implements java.io.Serializable {
 	}
 
 	@Column(name = "type")
-	public Boolean getType() {
+	public int getType() {
 		return this.type;
 	}
 
-	public void setType(Boolean type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
@@ -159,24 +150,6 @@ public class User implements java.io.Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByChildId")
-	public Set<Message> getMessagesForChildId() {
-		return this.messagesForChildId;
-	}
-
-	public void setMessagesForChildId(Set<Message> messagesForChildId) {
-		this.messagesForChildId = messagesForChildId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByParentId")
-	public Set<Message> getMessagesForParentId() {
-		return this.messagesForParentId;
-	}
-
-	public void setMessagesForParentId(Set<Message> messagesForParentId) {
-		this.messagesForParentId = messagesForParentId;
 	}
 
 }

@@ -28,7 +28,7 @@ public class UserDAO {
             pstmt.setDate(4, new Date(user.getBirthday().getTime()));
             pstmt.setString(5, user.getAvatarPath());
             pstmt.setString(6, user.getAddress());
-            pstmt.setBoolean(7, user.getType());
+            pstmt.setInt(7, user.getType());
             Timestamp now = new Timestamp(new java.util.Date().getTime());
             pstmt.setTimestamp(8, now);
             pstmt.setTimestamp(9, now);
@@ -59,7 +59,7 @@ public class UserDAO {
             pstmt.setDate(4, new Date(user.getBirthday().getTime()));
             pstmt.setString(5, user.getAvatarPath());
             pstmt.setString(6, user.getAddress());
-            pstmt.setBoolean(7, user.getType());
+            pstmt.setInt(7, user.getType());
             Timestamp now = new Timestamp(new java.util.Date().getTime());
             pstmt.setTimestamp(8, now);
             pstmt.setInt(9, user.getId());
@@ -72,6 +72,110 @@ public class UserDAO {
             } catch (Exception e) {
             }
         }
+    }
+	
+	public static ArrayList<User> getAllChild(int parentId)
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<User>();
+        try {
+            con = ConnectionFactory.openConnection();
+            String sql = "select id, email, password, name, birthday, avatar_path, address, type, create_date, update_date"
+            		+ " from user where id <> ? and type = 0 and address = (select address from user where id = ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, parentId);
+            pstmt.setInt(2, parentId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+            	String id = rs.getString("id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                java.util.Date birthday = rs.getDate("birthday");
+                String avatarPath = rs.getString("avatar_path");
+                String address = rs.getString("address");
+                int type = rs.getInt("type");
+                java.util.Date createDate = rs.getDate("create_date");
+                java.util.Date updateDate = rs.getDate("update_date");
+                
+                User entity = new User();
+                entity.setId(new Integer(id));
+                entity.setEmail(email);
+                entity.setPassword(password);
+                entity.setName(name);
+                entity.setBirthday(birthday);
+                entity.setAvatarPath(avatarPath);
+                entity.setAddress(address);
+                entity.setType(type);
+                entity.setCreateDate(createDate);
+                entity.setUpdateDate(updateDate);
+                
+                list.add(entity);
+            }
+            return list;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+	
+	public static User getParent(int childId)
+            throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        try {
+            con = ConnectionFactory.openConnection();
+            String sql = "select id, email, password, name, birthday, avatar_path, address, type, create_date, update_date"
+            		+ " from user where id <> ? and type = 1 and address = (select address from user where id = ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, childId);
+            pstmt.setInt(2, childId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+            	String id = rs.getString("id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                java.util.Date birthday = rs.getDate("birthday");
+                String avatarPath = rs.getString("avatar_path");
+                String address = rs.getString("address");
+                int type = rs.getInt("type");
+                java.util.Date createDate = rs.getDate("create_date");
+                java.util.Date updateDate = rs.getDate("update_date");
+
+                User entity = new User();
+                entity.setId(new Integer(id));
+                entity.setEmail(email);
+                entity.setPassword(password);
+                entity.setName(name);
+                entity.setBirthday(birthday);
+                entity.setAvatarPath(avatarPath);
+                entity.setAddress(address);
+                entity.setType(type);
+                entity.setCreateDate(createDate);
+                entity.setUpdateDate(updateDate);
+                
+                return entity;
+            }
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return null;
     }
 	
 	public static ArrayList<User> getAll()
@@ -93,7 +197,7 @@ public class UserDAO {
                 java.util.Date birthday = rs.getDate("birthday");
                 String avatarPath = rs.getString("avatar_path");
                 String address = rs.getString("address");
-                Boolean type = rs.getBoolean("type");
+                int type = rs.getInt("type");
                 java.util.Date createDate = rs.getDate("create_date");
                 java.util.Date updateDate = rs.getDate("update_date");
                 
@@ -142,7 +246,7 @@ public class UserDAO {
                 java.util.Date birthday = rs.getDate("birthday");
                 String avatarPath = rs.getString("avatar_path");
                 String address = rs.getString("address");
-                Boolean type = rs.getBoolean("type");
+                int type = rs.getInt("type");
                 java.util.Date createDate = rs.getDate("create_date");
                 java.util.Date updateDate = rs.getDate("update_date");
                 
@@ -194,7 +298,7 @@ public class UserDAO {
                 java.util.Date birthday = rs.getDate("birthday");
                 String avatarPath = rs.getString("avatar_path");
                 String address = rs.getString("address");
-                Boolean type = rs.getBoolean("type");
+                int type = rs.getInt("type");
                 java.util.Date createDate = rs.getDate("create_date");
                 java.util.Date updateDate = rs.getDate("update_date");
                 
