@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,18 +22,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadStatusDelegate;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -46,8 +43,10 @@ import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
+import io.hackathon.santaclaus.util.SingleUploadBroadcastReceiver;
+import io.hackathon.santaclaus.util.Utils;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity { // implements SingleUploadBroadcastReceiver.Delegate {
 
     private Button buttonChoose;
     private Button buttonUpload;
@@ -61,6 +60,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     // Uri to store the image uri
     private Uri filePath;
+
+    private final SingleUploadBroadcastReceiver uploadReceiver =
+            new SingleUploadBroadcastReceiver();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,18 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uploadReceiver.register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        uploadReceiver.unregister(this);
+    }
+
     /*
     * This is the method responsible for image upload
     * We need the full image path and the name for the image in this method
@@ -103,13 +118,43 @@ public class SignUpActivity extends AppCompatActivity {
         try {
             String uploadId = UUID.randomUUID().toString();
 
+//            uploadReceiver.setDelegate(this);
+//            uploadReceiver.setUploadID(uploadId);
+
             //Creating a multi part request
-            new MultipartUploadRequest(this, uploadId, Constants.UPLOAD_URL)
+            String s = new MultipartUploadRequest(this, uploadId, Constants.UPLOAD_URL)
                     .addFileToUpload(path, "image") //Adding file
                     .addParameter("name", name) //Adding text parameter to the request
                     .setNotificationConfig(new UploadNotificationConfig())
                     .setMaxRetries(2)
-                    .startUpload(); //Starting the upload
+                    .setDelegate(new UploadStatusDelegate() {
+                        @Override
+                        public void onProgress(UploadInfo uploadInfo) {
+                            // your code here
+                        }
+
+                        @Override
+                        public void onError(UploadInfo uploadInfo, Exception exception) {
+                            // your code here
+                        }
+
+                        @Override
+                        public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+                            // your code here
+                            // if you have mapped your server response to a POJO, you can easily get it:
+                            // YourClass obj = new Gson().fromJson(serverResponse.getBodyAsString(), YourClass.class);
+                                String aaa = serverResponse.getBodyAsString();
+                                Log.v("AAA", "AAAA");
+
+                        }
+
+                        @Override
+                        public void onCancelled(UploadInfo uploadInfo) {
+                            // your code here
+                        }
+                    })
+                    .startUpload();//Starting the upload
+
 
         } catch (Exception exc) {
             Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
@@ -225,39 +270,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Post json data to server
-     *
-     * @param url
-     * @param json
-     * @return
-     */
-    public String makePOSTRequest(String url, String json) {
-        String response = "";
-
-        try {
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-            // 5. set json to StringEntity
-            StringEntity se = new StringEntity(json);
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-            // 6. set httpPost Entity
-            httpPost.setEntity(se);
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return response;
-
-    }
-
-    /**
      * Sign Up
      *
      * @param v
@@ -271,6 +283,10 @@ public class SignUpActivity extends AppCompatActivity {
         TextView addressView = (TextView) findViewById(R.id.address);
         String email = emailView.getText().toString();
         String password = passwordView.getText().toString();
+        try {
+            password = Utils.encrypt(password);
+        } catch (Exception e) {
+        }
         String name = nameView.getText().toString();
         String address = addressView.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -299,11 +315,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Call API
         Thread thread = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 try  {
-                    String result_string = makePOSTRequest(Constants.CREATE_USER_URL, user_string);
+                    String result_string = Utils.makePOSTRequest(Constants.CREATE_USER_URL, user_string);
                     Type resultType = new TypeToken<Result>() {}.getType();
                     Result result = gson.fromJson(result_string, resultType);
                     if (Constants.INSERT_RESULT_CODE_SUCCESS != result.getResultCode()) {

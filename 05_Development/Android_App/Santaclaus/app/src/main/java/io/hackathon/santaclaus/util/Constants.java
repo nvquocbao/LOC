@@ -14,11 +14,11 @@ public class Constants {
 
     public final static int GROWN_UP_AGE = 20;
 
-    public static final String UPLOAD_URL = "http://192.168.94.1/AndroidImageUpload/upload.php";
+    public static final String UPLOAD_URL = "http://47.91.16.210/upload.php";
 
     public static final String IMAGES_URL = "http://192.168.94.1/AndroidImageUpload/getImages.php";
 
     public static final String CREATE_USER_URL = "http://47.91.16.210:8080/LOCWS/rest/user/create";
 
-
+    public static final String CHECK_LOGIN_URL = "http://47.91.16.210:8080/LOCWS/rest/user/login";
 }
