@@ -1,5 +1,8 @@
 package resource;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,8 +14,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
-import model.Lottery;
+import model.Common;
+import model.bean.Output;
 import model.bean.User;
+import model.dao.UserDAO;
 
 
 // Will map the resource to the URL todos
@@ -27,34 +32,89 @@ public class UserResource {
 	Request request;
 
 	@GET
+	@Path("/getAll")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Lottery getLottery() {
-		Lottery lottery = new Lottery("You must enter date", "", "", "", "", "", "", "", "", "");
-		return lottery;
+	public Output getAllUser() {
+		Output output = null;
+		ArrayList<User> listUser = null;
+		try {
+			listUser = UserDAO.getAll();
+			output = new Output(Common.RESULT_OK, listUser);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
+		}
+		return output;
 	}
 	
 	@GET
-	@Path("{date}")
+	@Path("/getById/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Lottery getLotteryWithDate(@PathParam("date") String date) {
-		
-		Lottery lottery = new Lottery(date, "Not Found", "", "", "", "", "", "", "", "");
-		if (date.equals("22-01-2015")) {
-			lottery = new Lottery(date, "68", "123", "9981", "1357", "21044", "54033", "93313", "02450", "761133");
-		} else if (date.equals("24-01-2015")){
-			lottery = new Lottery(date, "68", "777", "6666", "1568", "44444", "33333", "22222", "11111", "31568");
+	public Output getUserById(@PathParam("id") int id) {
+		Output output = null;
+		User user = null;
+		try {
+			user = UserDAO.getUserById(id);
+			output = new Output(Common.RESULT_OK, user);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
 		}
-		
-		return lottery;
+		return output;
 	}
-
-	@Path("/create")
+	
 	@POST
+	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Lottery createUser(User user){
-		System.out.println(user.getName() + " == ");
-		Lottery lottery = new Lottery("Not Found", "Not Found", "", "", "", "", "", "", "", "");
-		return lottery;
+	public Output login(User user){
+		Output output = null;
+		User tempUser = null;
+		try {
+			tempUser = UserDAO.login(user.getEmail(), user.getPassword());
+			if (tempUser != null) {
+				user = tempUser;
+				output = new Output(Common.RESULT_OK, user);
+			} else {
+				output = new Output(Common.RESULT_ERROR);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
+		}
+		return output;
+	}
+
+
+	@POST
+	@Path("/create")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Output createUser(User user){
+		Output output = null;
+		try {
+			UserDAO.insert(user);
+			output = new Output(Common.RESULT_OK);
+		} catch (ClassNotFoundException | SQLException e) {
+			output = new Output(Common.RESULT_OK);
+			e.printStackTrace();
+		}
+		return output;
+	}
+	
+	@POST
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Output updateUser(User user){
+		Output output = null;
+		try {
+			UserDAO.insert(user);
+			output = new Output(Common.RESULT_OK);
+		} catch (ClassNotFoundException | SQLException e) {
+			output = new Output(Common.RESULT_OK);
+			e.printStackTrace();
+		}
+		return output;
 	}
 }
