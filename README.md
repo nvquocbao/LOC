@@ -6,7 +6,7 @@ https://github.com/nvquocbao/LOC/tree/master/04.Source
 
 プログラム構成
 
-* Android スマホアプリ: https://github.com/umbalaconmeogia/MoreCo/tree/master/04.Source/morecoandroid
+* Android スマホアプリ: 
 
 # システム・アプリのインストール／ビルド／テスト方法
 
@@ -14,7 +14,7 @@ https://github.com/nvquocbao/LOC/tree/master/04.Source
 * 開発環境の必要な条件: Android Studio ver2.0 がおすすめです.  
   最新のAndroid SDKのSDKをダウンロードすることは必要です。 
 * 下記のプロジェクトをFork and cloneする
-https://github.com/umbalaconmeogia/MoreCo/tree/master/04.Source/morecoandroid
+https://github.com/nvquocbao/LOC/tree/master/Santaclaus
 
 #### Android Phoneアプリのビルド／インストール
 
@@ -31,6 +31,14 @@ https://github.com/umbalaconmeogia/MoreCo/tree/master/04.Source/morecoandroid
 * ウェブサーバ（ECS）に以下のソフトウェアをインストールする。
 ```sh
 ```
+|情報|設定値|
+|---|---|
+|OS|CentOS|
+|Internet IP|47.88.240.169|
+|Intranet IP|10.25.167.160|
+|EOS name|loc_ecs|
+|ユーザアカウント|loc_user|
+|パスワード|loc@1210|
 
 #### DBサーバ設定
 
@@ -39,10 +47,11 @@ https://github.com/umbalaconmeogia/MoreCo/tree/master/04.Source/morecoandroid
 
 |情報|設定値|
 |---|---|
+|DBタイプ|MySQL|
 |DB名|loc_db|
 |ユーザアカウント|loc_user|
-|パスワード||
-|ポート|3306|
+|パスワード|loc@1210|
+
 
 #### 本プロジェクトのウェブアプリケーションのインストール
 
