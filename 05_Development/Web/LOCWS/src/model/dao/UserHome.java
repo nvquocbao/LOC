@@ -59,6 +59,7 @@ public class UserHome {
 	}
 
 	public User findById(Integer id) {
+		System.out.println("getting User instance with id: " + id);
 		log.debug("getting User instance with id: " + id);
 		try {
 			User instance = entityManager.find(User.class, id);

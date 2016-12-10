@@ -35,8 +35,8 @@ https://github.com/nvquocbao/LOC/tree/master/05_Development/Web/LOCWS
 |情報|設定値|
 |---|---|
 |OS|CentOS|
-|Internet IP|47.88.240.169|
-|Intranet IP|10.25.167.160|
+|Internet IP|47.91.16.210|
+|Intranet IP|172.24.26.143|
 |EOS name|loc_ecs|
 |ユーザアカウント|loc_user|
 |パスワード|loc@1210|
@@ -54,8 +54,14 @@ https://github.com/nvquocbao/LOC/tree/master/05_Development/Web/LOCWS
 |パスワード|loc@1210|
 |Port|3306|
 |access address|loc-intranet.mysql.japan.rds.aliyuncs.com|
+|access address|loc-internet.mysql.japan.rds.aliyuncs.com|
 
-to login:mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -p loc@1210
+to login:
+* intranet
+mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@1210
+
+* internet
+mysql -h loc-internet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@1210
 
 #### 本プロジェクトのウェブアプリケーションのインストール
 

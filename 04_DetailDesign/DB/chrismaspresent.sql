@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2016-12-10 14:43:47
+Date: 2016-12-10 19:03:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,14 +49,17 @@ CREATE TABLE `user` (
   `birthday` date DEFAULT NULL,
   `avatar_path` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `type` tinyint(1) DEFAULT NULL COMMENT '[1:child,2:parent]',
+  `type` tinyint(1) DEFAULT NULL COMMENT '[0:child,1:parent]',
   `create_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `update_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'nvquocbao@gmail.com', '123456', 'Bao', '2000-01-01', null, '東京都目黒区', '0', '2016-12-10 10:34:12', '2016-12-10 10:34:12');
 INSERT INTO `user` VALUES ('2', 'test2@gmail.com', '123456', 'Test2', '2005-09-09', null, '東京都目黒区', '0', '2016-12-10 14:35:26', '2016-12-10 14:35:26');
+INSERT INTO `user` VALUES ('13', 'child1@gmail.com', '123456', 'Child1', '2000-01-01', null, '東京都渋谷区', '0', '2016-12-10 18:52:54', '2016-12-10 18:52:54');
+INSERT INTO `user` VALUES ('14', 'parent1@gmail.com', '123456', 'Parent1', '1970-03-03', null, '東京都渋谷区', '1', '2016-12-10 18:53:29', '2016-12-10 18:53:29');
+INSERT INTO `user` VALUES ('15', 'parent2@gmail.com', '123456', 'Parent2', '1980-09-09', null, '東京都目黒区', '1', '2016-12-10 18:54:54', '2016-12-10 18:54:54');
