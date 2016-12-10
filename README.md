@@ -2,7 +2,7 @@
 (Live On Cloud Team)
 
 # ソースプログラムのフォルダ
-https://github.com/nvquocbao/LOC/tree/master/04.Source
+https://github.com/nvquocbao/LOC/tree/master/05_Development/
 
 プログラム構成
 
@@ -14,7 +14,7 @@ https://github.com/nvquocbao/LOC/tree/master/04.Source
 * 開発環境の必要な条件: Android Studio ver2.0 がおすすめです.  
   最新のAndroid SDKのSDKをダウンロードすることは必要です。 
 * 下記のプロジェクトをFork and cloneする
-https://github.com/nvquocbao/LOC/tree/master/Santaclaus
+https://github.com/nvquocbao/LOC/tree/master/05_Development/Android_App/Santaclaus
 
 #### Android Phoneアプリのビルド／インストール
 
@@ -22,7 +22,8 @@ https://github.com/nvquocbao/LOC/tree/master/Santaclaus
 * Android 端末の設定を選択し、「開発者向けオプション」を設定する  
 * Android Studioで「ビルド」を選択して Android端末でアプリケージョンが起動する
 
-### Webシステム
+### Webサービスシステム
+https://github.com/nvquocbao/LOC/tree/master/05_Development/Web/LOCWS
 
 #### SBCloudにウェブサーバ（ECS）とDBサーバ（RDS）を作成する。
 
@@ -47,11 +48,14 @@ https://github.com/nvquocbao/LOC/tree/master/Santaclaus
 
 |情報|設定値|
 |---|---|
-|DBタイプ|MySQL|
+|DBタイプ|MySQL 5.6|
 |DB名|loc_db|
 |ユーザアカウント|loc_user|
 |パスワード|loc@1210|
+|Port|3306|
+|access address|loc-intranet.mysql.japan.rds.aliyuncs.com|
 
+to login:mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -p loc@1210
 
 #### 本プロジェクトのウェブアプリケーションのインストール
 
