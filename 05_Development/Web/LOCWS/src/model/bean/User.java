@@ -1,6 +1,6 @@
 package model.bean;
 
-// Generated 2016/12/10 13:11:08 by Hibernate Tools 4.3.1
+// Generated 2016/12/10 13:51:52 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +23,7 @@ import javax.persistence.TemporalType;
 @Table(name = "user", catalog = "chrismaspresent")
 public class User implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private String email;
 	private String password;
 	private String name;
@@ -37,18 +39,16 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(int id, String email, String password, String name) {
-		this.id = id;
+	public User(String email, String password, String name) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
 	}
 
-	public User(int id, String email, String password, String name,
-			Date birthday, String avatarPath, String address, Boolean type,
-			Date createDate, Date updateDate, Set<Message> messagesForChildId,
+	public User(String email, String password, String name, Date birthday,
+			String avatarPath, String address, Boolean type, Date createDate,
+			Date updateDate, Set<Message> messagesForChildId,
 			Set<Message> messagesForParentId) {
-		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -63,12 +63,13 @@ public class User implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

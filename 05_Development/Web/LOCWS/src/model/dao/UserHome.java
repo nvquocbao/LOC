@@ -1,6 +1,6 @@
 package model.dao;
 
-// Generated 2016/12/10 13:14:17 by Hibernate Tools 4.3.1
+// Generated 2016/12/10 13:54:13 by Hibernate Tools 4.3.1
 
 //import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,7 +58,7 @@ public class UserHome {
 		}
 	}
 
-	public User findById(int id) {
+	public User findById(Integer id) {
 		log.debug("getting User instance with id: " + id);
 		try {
 			User instance = entityManager.find(User.class, id);

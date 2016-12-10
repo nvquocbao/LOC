@@ -1,11 +1,13 @@
 package model.bean;
 
-// Generated 2016/12/10 13:11:08 by Hibernate Tools 4.3.1
+// Generated 2016/12/10 13:51:52 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "message", catalog = "chrismaspresent")
 public class Message implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private User userByChildId;
 	private User userByParentId;
 	private String content;
@@ -30,14 +32,12 @@ public class Message implements java.io.Serializable {
 	public Message() {
 	}
 
-	public Message(int id, User userByChildId) {
-		this.id = id;
+	public Message(User userByChildId) {
 		this.userByChildId = userByChildId;
 	}
 
-	public Message(int id, User userByChildId, User userByParentId,
-			String content, Date createDate, Date updateDate) {
-		this.id = id;
+	public Message(User userByChildId, User userByParentId, String content,
+			Date createDate, Date updateDate) {
 		this.userByChildId = userByChildId;
 		this.userByParentId = userByParentId;
 		this.content = content;
@@ -46,12 +46,13 @@ public class Message implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
