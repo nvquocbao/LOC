@@ -31,9 +31,8 @@ public class MessageResource {
 	@Context
 	Request request;
 
-	@POST
+	@GET
 	@Path("/list/{childId}/{parentId}")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Output listMessage(@PathParam("childId") int childId, @PathParam("parentId") int parentId) {
 		Output output = null;

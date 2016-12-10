@@ -17,16 +17,18 @@ public class MessageDAO {
 
         try {
             con = ConnectionFactory.openConnection();
-            String sql = "insert into Message (child_id, parent_id, content, create_date, update_date) "
-                    + "values (?, ?, ?, ?, ?)";
+            String sql = "insert into Message (child_id, parent_id, content, create_date, update_date, is_child) "
+                    + "values (?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
 
             pstmt.setInt(1, message.getChildId());
             pstmt.setInt(2, message.getParentId());
             pstmt.setString(3, message.getContent());
+
             Timestamp now = new Timestamp(new java.util.Date().getTime());
             pstmt.setTimestamp(4, now);
             pstmt.setTimestamp(5, now);
+            pstmt.setInt(6, message.getIsChild());
             
             pstmt.executeUpdate();
         } finally {
@@ -46,8 +48,8 @@ public class MessageDAO {
         ArrayList<Message> list = new ArrayList<Message>();
         try {
             con = ConnectionFactory.openConnection();
-            String sql = "select id, child_id, parent_id, content, create_date, update_date "
-            		+ "from Message where child_id = ? and parent_id = ?)";
+            String sql = "select id, child_id, parent_id, content, create_date, update_date, is_child "
+            		+ "from message where child_id = ? and parent_id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, childId);
             pstmt.setInt(2, parentId);
@@ -59,12 +61,14 @@ public class MessageDAO {
                 String content = rs.getString("content");
                 java.util.Date createDate = rs.getDate("create_date");
                 java.util.Date updateDate = rs.getDate("update_date");
+                int isChild = rs.getInt("is_child");
                 
                 Message entity = new Message();
                 entity.setId(new Integer(id));
                 entity.setChildId(childId);
                 entity.setParentId(parentId);
                 entity.setContent(content);
+                entity.setIsChild(isChild);
                 entity.setCreateDate(createDate);
                 entity.setUpdateDate(updateDate);
                 
@@ -105,6 +109,7 @@ public class MessageDAO {
                 String content = rs.getString("content");
                 java.util.Date createDate = rs.getDate("create_date");
                 java.util.Date updateDate = rs.getDate("update_date");
+                int isChild = rs.getInt("is_child");
                 
                 Message entity = new Message();
                 entity.setId(new Integer(id));
@@ -113,6 +118,7 @@ public class MessageDAO {
                 entity.setContent(content);
                 entity.setCreateDate(createDate);
                 entity.setUpdateDate(updateDate);
+                entity.setIsChild(isChild);
                 
                 list.add(entity);
             }
