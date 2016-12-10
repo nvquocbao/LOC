@@ -47,7 +47,7 @@
 			 move_uploaded_file($_FILES['image']['tmp_name'],$file_path);
 			 //filling response array with values 
 			 $response['resultCode'] = 0; 
-			 $response['url'] = $file_url;
+			 $response['returnObject'] = $file_url;
 		 }catch(Exception $e){
 			 $response['resultCode']=1;
 			 $response['message']=$e->getMessage();
