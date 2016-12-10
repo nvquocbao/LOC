@@ -13,7 +13,7 @@ import java.util.Date;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.User;
-import io.hackathon.santaclaus.util.Const;
+import io.hackathon.santaclaus.util.Constants;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordView.getText().toString();
         User user = isLogined(email, password);
         if (null != user) {
-            if (Const.USER_TYPE_CHILD == user.getType()) {
+            if (Constants.USER_TYPE_CHILD == user.getType()) {
                 // Go to Message
                 Intent intent = new Intent(this, MessageActivity.class);
                 startActivity(intent);
-            } else if (Const.USER_TYPE_PARENT == user.getType()) {
+            } else if (Constants.USER_TYPE_PARENT == user.getType()) {
                 // Go to Child
                 Intent intent = new Intent(this, ChildActivity.class);
                 startActivity(intent);
@@ -66,13 +66,13 @@ public class LoginActivity extends AppCompatActivity {
      */
     private User isLogined(String email, String password) {
         User user = new User();
-        user.setId(1);
+//        user.setId(1);
         user.setEmail("trinhnt@gmail.com");
         user.setName("Trinh");
         user.setBirthday("1983/05/12");
         user.setAvatarPath("trinhnt.jpg");
         user.setAddress("Tokyo-shi Mitato-ku");
-        user.setType(Const.USER_TYPE_PARENT);
+        user.setType(Constants.USER_TYPE_PARENT);
         Date date = new Date();
         String str = new SimpleDateFormat("yyyy-MM-dd").format(date);
         user.setCreateDate(str);

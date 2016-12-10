@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "io.hackathon.santaclaus"
         minSdkVersion 19
@@ -27,4 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'net.gotev:uploadservice:3.0.3'
+
 }

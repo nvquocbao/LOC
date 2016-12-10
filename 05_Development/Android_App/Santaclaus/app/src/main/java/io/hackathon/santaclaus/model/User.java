@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class User implements Serializable {
 
-    private int id;
+//    private int id;
 
     private String email;
 
@@ -29,13 +29,13 @@ public class User implements Serializable {
 
     private String updateDate;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getEmail() {
         return email;
