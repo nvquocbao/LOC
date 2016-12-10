@@ -3,4 +3,6 @@
 
 <hibernate-reverse-engineering>
   <table-filter match-schema="chrismaspresent" match-name=".*"/>
+  <table-filter match-catalog="chrismaspresent" match-name="message"/>
+  <table-filter match-catalog="chrismaspresent" match-name="user"/>
 </hibernate-reverse-engineering>
