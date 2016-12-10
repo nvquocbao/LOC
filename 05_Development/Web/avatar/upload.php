@@ -10,7 +10,7 @@
  $server_ip = gethostbyname(gethostname());
  
  //creating the upload url 
- $upload_url = 'http://'.$server_ip.'/AndroidImageUpload/'.$upload_path; 
+ $upload_url = 'http://'.$server_ip.'/'.$upload_path; 
  
  //response array 
  $response = array(); 
@@ -33,11 +33,13 @@
 		 //getting the file extension 
 		 $extension = $fileinfo['extension'];
 		 
+		 $file_name = 'myfile_'.date('m-d-Y_hia');
+		 
 		 //file url to store in the database 
-		 $file_url = $upload_url . getFileName() . '.' . $extension;
+		 $file_url = $upload_url . $file_name . '.' . $extension;
 		 
 		 //file path to upload in the server 
-		 $file_path = $upload_path . getFileName() . '.'. $extension; 
+		 $file_path = $upload_path . $file_name . '.'. $extension; 
 		 
 		 //trying to save the file in the directory 
 		 try{
@@ -59,20 +61,4 @@
 		 $response['resultCode']=1;
 		 $response['message']='Please choose a file';
 	 }
- }
- 
- /*
- We are generating the file name 
- so this method will return a file name for the image to be upload 
- */
- function getFileName(){
-	 $con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect...');
-	 $sql = "SELECT max(id) as id FROM images";
-	 $result = mysqli_fetch_array(mysqli_query($con,$sql));
-	 
-	 mysqli_close($con);
-	 if($result['id']==null)
-		return 1; 
-	 else 
-		return ++$result['id']; 
  }
