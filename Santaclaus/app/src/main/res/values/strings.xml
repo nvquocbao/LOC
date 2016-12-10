@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Santaclaus</string>
 
-    <string name="email">Email:</string>
-    <string name="password">Password:</string>
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_ok_button">Login</string>
+    <string name="login_signup_button">SignUp</string>
+
+    <!-- SignUp -->
+    <string name="signup_title">Sign Up</string>
+    <string name="signup_email">Email</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_name">Name</string>
+    <string name="signup_birthday">Birthday</string>
+    <string name="signup_address">Address</string>
+    <string name="signup_avatar">Address</string>
+    <string name="signup_ok_button">SignUp</string>
+
+    <!-- Message -->
+    <string name="message_title">Message</string>
+
 </resources>
