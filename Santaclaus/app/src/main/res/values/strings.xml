@@ -20,5 +20,8 @@
 
     <!-- Message -->
     <string name="message_title">Message</string>
+    <string name="message_message_label">Message</string>
+    <string name="message_message_list_label">Message List</string>
+    <string name="message_send_button">Send</string>
 
 </resources>

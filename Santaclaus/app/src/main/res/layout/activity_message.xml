@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_message"
     android:orientation="vertical"
@@ -12,10 +12,57 @@
     tools:context="io.hackathon.santaclaus.MessageActivity">
 
     <TextView
+        android:id="@+id/messageTitle"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/message_title"
         android:textSize="@dimen/message_title_size" />
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/childList"
+        android:layout_below="@+id/messageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="300px">
+    </ListView>
+
+    <TextView
+        android:id="@+id/messageListLabel"
+        android:layout_below="@+id/childList"
+        android:layout_marginTop="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_message_list_label" />
+
+    <ListView
+        android:id="@+id/messageList"
+        android:layout_below="@+id/messageListLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="300px">
+    </ListView>
+
+    <RelativeLayout
+        android:layout_below="@+id/messageList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message_message_label" />
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message_send_button" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_alignParentBottom="true"
+        android:layout_width="300px"
+        android:layout_height="150dp"
+        android:hint="Message"
+        android:inputType="text|textMultiLine" />
+
+</RelativeLayout>
