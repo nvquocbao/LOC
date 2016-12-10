@@ -57,9 +57,11 @@ https://github.com/nvquocbao/LOC/tree/master/05_Development/Web/LOCWS
 |access address|loc-internet.mysql.japan.rds.aliyuncs.com|
 
 to login:
+* intranet
+mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@1210
 
-mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -p loc@1210
-mysql -h loc-internet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -p loc@1210
+* internet
+mysql -h loc-internet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@1210
 
 #### 本プロジェクトのウェブアプリケーションのインストール
 
