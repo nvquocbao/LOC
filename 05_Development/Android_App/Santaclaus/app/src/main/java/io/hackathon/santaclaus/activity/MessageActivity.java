@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,6 +30,9 @@ public class MessageActivity extends AppCompatActivity {
 
     String parentId = "";
     String childId = "";
+    String url = "";
+    String parentName = "";
+    String childName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,7 @@ public class MessageActivity extends AppCompatActivity {
 
         // Get params
         Intent intent = getIntent();
-        String parentName = "";
-        String childName = "";
+
         if (null != intent) {
             parentId = intent.getStringExtra("parentId");
             childId = intent.getStringExtra("childId");
@@ -46,12 +50,18 @@ public class MessageActivity extends AppCompatActivity {
         }
 
         // Call API
-        String url = "";
         if (null != parentId) {
             url = Constants.GET_MESSAGE_LIST_URL + childId + "/" + parentId;
         } else {
             url = Constants.GET_MESSAGE_LIST_URL + childId;
         }
+        setListView();
+    }
+
+    /**
+     * Set list view
+     */
+    private void setListView() {
         String result_str = "";
         try {
             result_str = new GetRequestTask().execute(url).get();
@@ -81,7 +91,10 @@ public class MessageActivity extends AppCompatActivity {
         }
         ListView listView = (ListView) findViewById(R.id.messageList);
         MessageAdapter messageAdapter = new MessageAdapter(this, messageList);
+//        messageAdapter.notifyDataSetChanged();
+        ((BaseAdapter) messageAdapter).notifyDataSetChanged();
         listView.setAdapter(messageAdapter);
+        listView.invalidateViews();
     }
 
     // Send button
@@ -130,5 +143,10 @@ public class MessageActivity extends AppCompatActivity {
         if (Constants.INSERT_RESULT_CODE_SUCCESS != result.getResultCode()) {
             return;
         }
+        // Success
+        Toast.makeText(getApplicationContext(), getString(R.string.message_save_msg),
+                Toast.LENGTH_LONG).show();
+        messageView.setText("");
+        setListView();
     }
 }
