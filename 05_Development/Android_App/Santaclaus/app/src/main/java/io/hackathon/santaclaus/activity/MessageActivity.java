@@ -20,8 +20,8 @@ import io.hackathon.santaclaus.model.Message;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.CreateMessageTask;
-import io.hackathon.santaclaus.util.GetRequestTask;
+import io.hackathon.santaclaus.task.CreateMessageTask;
+import io.hackathon.santaclaus.task.GetRequestTask;
 import io.hackathon.santaclaus.util.Utils;
 
 public class MessageActivity extends AppCompatActivity {

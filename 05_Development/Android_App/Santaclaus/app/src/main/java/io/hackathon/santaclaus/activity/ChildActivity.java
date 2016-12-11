@@ -8,13 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import io.hackathon.santaclaus.R;
@@ -22,7 +19,7 @@ import io.hackathon.santaclaus.adapter.ChildAdapter;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.GetRequestTask;
+import io.hackathon.santaclaus.task.GetRequestTask;
 
 public class ChildActivity extends AppCompatActivity {
 

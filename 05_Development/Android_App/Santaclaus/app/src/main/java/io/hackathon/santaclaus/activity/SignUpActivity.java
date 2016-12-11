@@ -38,9 +38,8 @@ import java.util.concurrent.ExecutionException;
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
-import io.hackathon.santaclaus.util.CheckLoginTask;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.CreateUserTask;
+import io.hackathon.santaclaus.task.CreateUserTask;
 import io.hackathon.santaclaus.util.Utils;
 
 public class SignUpActivity extends AppCompatActivity {

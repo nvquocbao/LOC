@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.CheckLoginTask;
+import io.hackathon.santaclaus.task.CheckLoginTask;
 import io.hackathon.santaclaus.util.Utils;
 
 public class LoginActivity extends AppCompatActivity {
