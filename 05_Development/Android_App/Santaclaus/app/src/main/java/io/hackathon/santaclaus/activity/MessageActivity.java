@@ -48,8 +48,12 @@ public class MessageActivity extends AppCompatActivity {
         }
 
         // Call API
-//        String url = Constants.GET_MESSAGE_LIST_URL + childId + "/" + parentId;
-        String url = Constants.GET_MESSAGE_LIST_URL + "29/31";
+        String url = "";
+        if (null != parentId) {
+            url = Constants.GET_MESSAGE_LIST_URL + childId + "/" + parentId;
+        } else {
+            url = Constants.GET_MESSAGE_LIST_URL + childId;
+        }
         String result_str = "";
         try {
             result_str = new GetRequestTask().execute(url).get();

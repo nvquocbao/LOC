@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             if (Constants.USER_TYPE_CHILD == user.getType()) {
                 // Go to Message
                 Intent intent = new Intent(this, MessageActivity.class);
+                intent.putExtra("childId", user.getId()+"");
+                intent.putExtra("childName", user.getName());
                 startActivity(intent);
             } else if (Constants.USER_TYPE_PARENT == user.getType()) {
                 // Go to Child
