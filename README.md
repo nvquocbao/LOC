@@ -61,9 +61,9 @@ https://github.com/nvquocbao/LOC/tree/master/05_Development/Web/avatar
 |ユーザアカウント|loc_user|
 |パスワード|loc@1210|
 
-#### DBサーバ設定
+#### DBサーバー設定
 
-* DBサーバ（RDS）にMySQLをインストールし、ウェブサーバからMySQLに接続できるように設定する。
+* DBサーバー（RDS）にMySQLをインストールし、ウェブサーバからMySQLに接続できるように設定する。
 データベースとユーザを作成する。
 
 |情報|設定値|
@@ -83,7 +83,7 @@ mysql -h loc-intranet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@121
 * internet
 mysql -h loc-internet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@1210
 
-#### 本プロジェクトのウェブアプリケーションのインストール
+#### 本プロジェクトのデータベースのインストール
 
 * システムのユーザloc_userを作成する。
 * データベース作成
@@ -124,13 +124,8 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 ```
 
-#### 初期データ設定
-
-ウェブサーバ上に以下のシェルコマンド実行
-```
-
-```
-#### テスト
+#### 本プロジェクトのウェブアプリケーションのインストール
+「LOC\07_Release\LOCWS.war」をTomcatにデプロイする。
 
 * AndroidアプリからYouGiftマークアイコンを押下して開く。
 
