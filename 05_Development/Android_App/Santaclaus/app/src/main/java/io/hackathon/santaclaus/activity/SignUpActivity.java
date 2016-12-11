@@ -318,12 +318,14 @@ public class SignUpActivity extends AppCompatActivity {
         if (Constants.USER_TYPE_CHILD == type) {
             // Go to Message
             Intent intent = new Intent(this, MessageActivity.class);
-            intent.putExtra("parentId", resultUser.getId()+"");
-            intent.putExtra("parentName", resultUser.getName());
+            intent.putExtra("childId", resultUser.getId()+"");
+            intent.putExtra("childName", resultUser.getName());
             startActivity(intent);
         } else if (Constants.USER_TYPE_PARENT == type) {
             // Go to Child
             Intent intent = new Intent(this, ChildActivity.class);
+            intent.putExtra("parentId", user.getId()+"");
+            intent.putExtra("parentName", user.getName());
             startActivity(intent);
         }
     }
