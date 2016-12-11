@@ -68,20 +68,20 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'nvquocbao@gmail.com', '123456', 'Bao', '2000-01-01', null, '東京都目黒区', '0', '2016-12-10 10:34:12', '2016-12-10 10:34:12');
-INSERT INTO `user` VALUES ('2', 'test2@gmail.com', '123456', 'Test2', '2005-09-09', null, '東京都目黒区', '0', '2016-12-10 14:35:26', '2016-12-10 14:35:26');
-INSERT INTO `user` VALUES ('13', 'child1@gmail.com', '123456', 'Child1', '2000-01-01', null, '東京都渋谷区', '0', '2016-12-10 18:52:54', '2016-12-10 18:52:54');
-INSERT INTO `user` VALUES ('14', 'parent1@gmail.com', '123456', 'Parent1', '1970-03-03', null, '東京都渋谷区', '1', '2016-12-10 18:53:29', '2016-12-10 18:53:29');
-INSERT INTO `user` VALUES ('15', 'parent2@gmail.com', '123456', 'Parent2', '1980-09-09', null, '東京都目黒区', '1', '2016-12-10 18:54:54', '2016-12-10 18:54:54');
-INSERT INTO `user` VALUES ('16', 'test1@gmail.com', '123457', 'test1', '2000-01-02', null, '東京都目黒区', '0', '2016-12-10 19:26:00', '2016-12-10 19:26:00');
-INSERT INTO `user` VALUES ('18', 'test3@gmail.com', '123456', 'Test3', '2005-09-03', null, '東京都目黒区', '0', '2016-12-10 19:27:30', '2016-12-10 19:27:30');
-INSERT INTO `user` VALUES ('20', 'trinhnt@gmail.com', '23456', 'Trinh', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 18:47:38', '2016-12-10 18:47:38');
-INSERT INTO `user` VALUES ('22', 'trinhnt2@gmail.com', '12343', 'Trinhnt2', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 18:58:25', '2016-12-10 18:58:25');
-INSERT INTO `user` VALUES ('23', 'trinhnt3@gmail.com', '123456', 'Trinh', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 19:01:14', '2016-12-10 19:01:14');
-INSERT INTO `user` VALUES ('24', 'training@gmail.com', '123456', 'Trinh', '2013-05-12', null, 'Chibaken', '0', '2016-12-10 19:02:20', '2016-12-10 19:02:20');
-INSERT INTO `user` VALUES ('25', 'trinhnt5@gmail.com', '123535', 'Trinhnt', '1983-05-05', null, 'Trinh', '1', '2016-12-10 19:04:26', '2016-12-10 19:04:26');
-INSERT INTO `user` VALUES ('27', 'child2@gmail.com', '123456', 'Child2', '2005-10-09', null, '東京都千代田区', '0', '2016-12-11 15:35:26', '2016-12-11 15:35:26');
-INSERT INTO `user` VALUES ('28', 'child3_1@gmail.com', '123456', 'Child3_1', '2009-10-09', null, '東京都港区3-1-1', '0', '2016-12-11 15:36:26', '2016-12-11 15:36:26');
-INSERT INTO `user` VALUES ('29', 'child3_2@gmail.com', '123456', 'Child3_2', '2007-12-12', null, '東京都港区3-1-1', '0', '2016-12-11 15:37:26', '2016-12-11 15:37:26');
-INSERT INTO `user` VALUES ('30', 'child3_3@gmail.com', '123456', 'Child3_3', '2000-02-04', null, '東京都港区3-1-1', '0', '2016-12-09 15:37:26', '2016-12-09 15:37:26');
-INSERT INTO `user` VALUES ('31', 'parent3@gmail.com', '123456', 'Parent3', '1983-12-04', null, '東京都港区3-1-1', '1', '2016-12-09 03:37:50', '2016-12-09 03:37:50');
+INSERT INTO `user` VALUES ('1', 'nvquocbao@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Bao', '2000-01-01', null, '東京都目黒区', '0', '2016-12-10 10:34:12', '2016-12-10 10:34:12');
+INSERT INTO `user` VALUES ('2', 'test2@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Test2', '2005-09-09', null, '東京都目黒区', '0', '2016-12-10 14:35:26', '2016-12-10 14:35:26');
+INSERT INTO `user` VALUES ('13', 'child1@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Child1', '2000-01-01', null, '東京都渋谷区', '0', '2016-12-10 18:52:54', '2016-12-10 18:52:54');
+INSERT INTO `user` VALUES ('14', 'parent1@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Parent1', '1970-03-03', null, '東京都渋谷区', '1', '2016-12-10 18:53:29', '2016-12-10 18:53:29');
+INSERT INTO `user` VALUES ('15', 'parent2@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Parent2', '1980-09-09', null, '東京都目黒区', '1', '2016-12-10 18:54:54', '2016-12-10 18:54:54');
+INSERT INTO `user` VALUES ('16', 'test1@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'test1', '2000-01-02', null, '東京都目黒区', '0', '2016-12-10 19:26:00', '2016-12-10 19:26:00');
+INSERT INTO `user` VALUES ('18', 'test3@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Test3', '2005-09-03', null, '東京都目黒区', '0', '2016-12-10 19:27:30', '2016-12-10 19:27:30');
+INSERT INTO `user` VALUES ('20', 'trinhnt@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Trinh', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 18:47:38', '2016-12-10 18:47:38');
+INSERT INTO `user` VALUES ('22', 'trinhnt2@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Trinhnt2', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 18:58:25', '2016-12-10 18:58:25');
+INSERT INTO `user` VALUES ('23', 'trinhnt3@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Trinh', '1983-05-12', null, 'Chibaken', '1', '2016-12-10 19:01:14', '2016-12-10 19:01:14');
+INSERT INTO `user` VALUES ('24', 'training@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Trinh', '2013-05-12', null, 'Chibaken', '0', '2016-12-10 19:02:20', '2016-12-10 19:02:20');
+INSERT INTO `user` VALUES ('25', 'trinhnt5@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Trinhnt', '1983-05-05', null, 'Trinh', '1', '2016-12-10 19:04:26', '2016-12-10 19:04:26');
+INSERT INTO `user` VALUES ('27', 'child2@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Child2', '2005-10-09', null, '東京都千代田区', '0', '2016-12-11 15:35:26', '2016-12-11 15:35:26');
+INSERT INTO `user` VALUES ('28', 'child3_1@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Child3_1', '2009-10-09', null, '東京都港区3-1-1', '0', '2016-12-11 15:36:26', '2016-12-11 15:36:26');
+INSERT INTO `user` VALUES ('29', 'child3_2@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Child3_2', '2007-12-12', null, '東京都港区3-1-1', '0', '2016-12-11 15:37:26', '2016-12-11 15:37:26');
+INSERT INTO `user` VALUES ('30', 'child3_3@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Child3_3', '2000-02-04', null, '東京都港区3-1-1', '0', '2016-12-09 15:37:26', '2016-12-09 15:37:26');
+INSERT INTO `user` VALUES ('31', 'parent3@gmail.com', 'e1adc3949ba59abbe56e057f2f883e', 'Parent3', '1983-12-04', null, '東京都港区3-1-1', '1', '2016-12-09 03:37:50', '2016-12-09 03:37:50');

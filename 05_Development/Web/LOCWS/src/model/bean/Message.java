@@ -5,12 +5,9 @@ package model.bean;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,8 +24,6 @@ public class Message implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private User userByChildId;
-	private User userByParentId;
 	private String content;
 	private int childId;
 	private int parentId;
@@ -39,14 +34,8 @@ public class Message implements java.io.Serializable {
 	public Message() {
 	}
 
-	public Message(User userByChildId) {
-		this.userByChildId = userByChildId;
-	}
-
-	public Message(User userByChildId, User userByParentId, String content, int childId, int parentId,
+	public Message(String content, int childId, int parentId,
 			Date createDate, Date updateDate) {
-		this.userByChildId = userByChildId;
-		this.userByParentId = userByParentId;
 		this.childId = childId;
 		this.parentId = parentId;
 		this.createDate = createDate;
@@ -62,26 +51,6 @@ public class Message implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "child_id", nullable = false)
-	public User getUserByChildId() {
-		return this.userByChildId;
-	}
-
-	public void setUserByChildId(User userByChildId) {
-		this.userByChildId = userByChildId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
-	public User getUserByParentId() {
-		return this.userByParentId;
-	}
-
-	public void setUserByParentId(User userByParentId) {
-		this.userByParentId = userByParentId;
 	}
 
 	@Column(name = "content", length = 65535)

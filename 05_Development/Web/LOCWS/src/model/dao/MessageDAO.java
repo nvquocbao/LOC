@@ -85,6 +85,52 @@ public class MessageDAO {
             }
         }
     }
+	
+	public static ArrayList<Message> getAllMessageOfChild(int childId)
+            throws ClassNotFoundException, SQLException {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<Message> list = new ArrayList<Message>();
+        try {
+            con = ConnectionFactory.openConnection();
+            String sql = "select id, child_id, parent_id, content, create_date, update_date, is_child "
+            		+ "from message where child_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, childId);
+            
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                int parentId = rs.getInt("parent_id");
+                String content = rs.getString("content");
+                java.util.Date createDate = rs.getDate("create_date");
+                java.util.Date updateDate = rs.getDate("update_date");
+                int isChild = rs.getInt("is_child");
+                
+                Message entity = new Message();
+                entity.setId(new Integer(id));
+                entity.setChildId(childId);
+                entity.setParentId(parentId);
+                entity.setContent(content);
+                entity.setIsChild(isChild);
+                entity.setCreateDate(createDate);
+                entity.setUpdateDate(updateDate);
+                
+                list.add(entity);
+            }
+            return list;
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (Exception e) {
+            	
+            	
+            }
+        }
+    }
 
     public static ArrayList<Message> getAllMessageOfUser(User user)
             throws ClassNotFoundException, SQLException {
