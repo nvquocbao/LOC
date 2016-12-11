@@ -122,6 +122,8 @@ public class MessageActivity extends AppCompatActivity {
                 final User resultUser = gson.fromJson(resultObject.getReturnObject().toString(), userType);
                 msg.setParentId(resultUser.getId());
             }
+        } else {
+            msg.setParentId(Utils.getIntegerValue(parentId));
         }
         msg.setChildId(Utils.getIntegerValue(childId));
         msg.setContent(messageView.getText().toString());
