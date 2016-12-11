@@ -39,7 +39,7 @@ public class ChildActivity extends AppCompatActivity {
         }
 
         // Call API
-        String url = Constants.GET_CHILD_LIST_URL + "36";
+        String url = Constants.GET_CHILD_LIST_URL + parentId;
         String result_str = "";
         try {
             result_str = new GetRequestTask().execute(url).get();

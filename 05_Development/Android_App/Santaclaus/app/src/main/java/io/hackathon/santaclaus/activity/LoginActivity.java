@@ -88,11 +88,14 @@ public class LoginActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
         } catch (ExecutionException e) {
         }
-        Type userType = new TypeToken<User>() {}.getType();
-        User resultObject = gson.fromJson(result_str, userType);
-        user.setId(resultObject.getId());
-        user.setType(resultObject.getType());
-        user.setName(resultObject.getName());
+        if (null != result_str) {
+            Type userType = new TypeToken<User>() {
+            }.getType();
+            User resultObject = gson.fromJson(result_str, userType);
+            user.setId(resultObject.getId());
+            user.setType(resultObject.getType());
+            user.setName(resultObject.getName());
+        }
         return user;
     }
 
