@@ -81,7 +81,7 @@ public class MessageActivity extends AppCompatActivity {
             Message msg = messageList.get(i);
             if (msg.getIsChild() == Constants.IS_PARENT) { // Parent
                 User user = new User();
-                user.setName(parentName);
+                user.setName(null != parentName ? parentName : getString(R.string.message_stanta_name));
                 msg.setUser(user);
             } else if (msg.getIsChild() == Constants.IS_CHILD) { // Child
                 User user = new User();

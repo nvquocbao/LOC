@@ -24,6 +24,6 @@
     <string name="message_message_label">Message</string>
     <string name="message_message_list_label">Message List</string>
     <string name="message_send_button">Send</string>
-    <string name="message_save_msg">Create Message Success!</string>
+    <string name="message_stanta_name">Santa Claus</string>
 
 </resources>
