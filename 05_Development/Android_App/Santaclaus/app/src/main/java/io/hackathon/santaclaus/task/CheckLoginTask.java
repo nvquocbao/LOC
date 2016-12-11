@@ -27,10 +27,11 @@ public class CheckLoginTask extends AsyncTask<String, String, String> {
         Result result = gson.fromJson(result_string, resultType);
         if (null == result.getReturnObject()) {
             return null;
+        } else {
+            LinkedTreeMap<String, String> yourMap = (LinkedTreeMap<String, String>) result.getReturnObject();
+            JsonObject jsonObject = gson.toJsonTree(yourMap).getAsJsonObject();
+            return jsonObject.toString();
         }
-        LinkedTreeMap<String, String> yourMap = (LinkedTreeMap<String, String>) result.getReturnObject();
-        JsonObject jsonObject = gson.toJsonTree(yourMap).getAsJsonObject();
-        return jsonObject.toString();
     }
 
     @Override
