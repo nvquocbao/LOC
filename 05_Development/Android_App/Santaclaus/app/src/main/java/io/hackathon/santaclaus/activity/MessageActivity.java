@@ -92,7 +92,9 @@ public class MessageActivity extends AppCompatActivity {
             return;
         }
         Message msg = new Message();
-        msg.setParentId(Utils.getIntegerValue(parentId));
+        if (null != parentId) {
+            msg.setParentId(Utils.getIntegerValue(parentId));
+        }
         msg.setChildId(Utils.getIntegerValue(childId));
         msg.setContent(messageView.getText().toString());
         if (null != parentId) {
