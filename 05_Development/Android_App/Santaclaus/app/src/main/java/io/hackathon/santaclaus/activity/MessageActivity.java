@@ -9,9 +9,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -55,7 +59,28 @@ public class MessageActivity extends AppCompatActivity {
         } else {
             url = Constants.GET_MESSAGE_LIST_URL + childId;
         }
-        setListView();
+
+        // TODO: For Demo
+        Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // update TextView here!
+                                setListView();
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+        t.start();
     }
 
     /**
@@ -69,12 +94,17 @@ public class MessageActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
         }
         Gson gson = new Gson();
+//        Gson gson = new GsonBuilder()
+//                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE_WITH_SPACES)
+//                .create();
         Type resultType = new TypeToken<Result>() {
         }.getType();
         Result resultObject = gson.fromJson(result_str, resultType);
         Type messageType = new TypeToken<List<Message>>() {
         }.getType();
-        final List<Message> messageList = gson.fromJson(resultObject.getReturnObject().toString(), messageType);
+        JsonReader jr = new JsonReader(new StringReader(resultObject.getReturnObject().toString().trim()));
+        jr.setLenient(true);
+        final List<Message> messageList = gson.fromJson(jr, messageType);
 
         // Init listView
         for (int i = 0; i < messageList.size(); i++) {
