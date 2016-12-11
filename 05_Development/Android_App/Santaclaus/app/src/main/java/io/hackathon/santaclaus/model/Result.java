@@ -10,9 +10,6 @@ public class Result {
 
     private Object returnObject;
 
-    // Avatar path from PHP server
-    private String url;
-
     public int getResultCode() {
         return resultCode;
     }
@@ -29,11 +26,4 @@ public class Result {
         this.returnObject = returnObject;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

@@ -16,9 +16,11 @@ public class Constants {
 
     public static final String UPLOAD_URL = "http://47.91.16.210/upload.php";
 
-    public static final String IMAGES_URL = "http://192.168.94.1/AndroidImageUpload/getImages.php";
-
     public static final String CREATE_USER_URL = "http://47.91.16.210:8080/LOCWS/rest/user/create";
 
     public static final String CHECK_LOGIN_URL = "http://47.91.16.210:8080/LOCWS/rest/user/login";
+
+    public static final String GET_CHILD_LIST_URL = "http://47.91.16.210:8080/LOCWS/rest/user/getAllChild/";
+
+    public static final String CREATE_MESSAGE_URL = "http://47.91.16.210:8080/LOCWS/rest/message/create";
 }
