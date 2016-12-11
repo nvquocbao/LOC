@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.Message;
+import io.hackathon.santaclaus.util.Constants;
 
 /**
  * Created by trinhnt on 2016/12/10.
@@ -35,13 +36,15 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         Message message = messageList.get(position);
         ImageView avatarView = (ImageView) rowView.findViewById(R.id.avatar);
         // TODO: message.getUser().getAvatar_path()
-        avatarView.setImageResource(R.drawable.user_avatar);
+        if (message.getIsChild() == Constants.IS_PARENT) {
+            avatarView.setImageResource(R.drawable.santa_avatar);
+        } else {
+            avatarView.setImageResource(R.drawable.user_avatar);
+        }
         TextView nameView = (TextView) rowView.findViewById(R.id.name);
         nameView.setText(message.getUser().getName());
         TextView contentView = (TextView) rowView.findViewById(R.id.content);
         contentView.setText(message.getContent());
-
-
         return rowView;
     }
 }
