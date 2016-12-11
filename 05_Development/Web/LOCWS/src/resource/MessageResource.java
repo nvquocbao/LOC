@@ -47,6 +47,22 @@ public class MessageResource {
 		return output;
 	}
 	
+	@GET
+	@Path("/list/{childId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Output listMessageOfChild(@PathParam("childId") int childId) {
+		Output output = null;
+		ArrayList<Message> listMessage = null;
+		try {
+			listMessage = MessageDAO.getAllMessageOfChild(childId);
+			output = new Output(Common.RESULT_OK, listMessage);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			output = new Output(Common.RESULT_ERROR);
+		}
+		return output;
+	}
+	
 	@POST
 	@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
