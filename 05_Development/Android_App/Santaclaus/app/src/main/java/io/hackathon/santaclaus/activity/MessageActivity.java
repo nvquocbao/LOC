@@ -118,8 +118,10 @@ public class MessageActivity extends AppCompatActivity {
             Type resultType = new TypeToken<Result>() {}.getType();
             Result resultObject = gson.fromJson(result_str, resultType);
             Type userType = new TypeToken<User>() {}.getType();
-            final User resultUser = gson.fromJson(resultObject.getReturnObject().toString(), userType);
-            msg.setParentId(resultUser.getId());
+            if (null != resultObject.getReturnObject()) {
+                final User resultUser = gson.fromJson(resultObject.getReturnObject().toString(), userType);
+                msg.setParentId(resultUser.getId());
+            }
         }
         msg.setChildId(Utils.getIntegerValue(childId));
         msg.setContent(messageView.getText().toString());
