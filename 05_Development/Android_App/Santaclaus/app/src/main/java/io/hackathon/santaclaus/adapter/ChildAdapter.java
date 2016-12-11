@@ -17,8 +17,6 @@ import java.util.List;
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.User;
 
-import static android.R.attr.bitmap;
-
 /**
  * Created by trinhnt on 2016/12/10.
  */
@@ -46,8 +44,6 @@ public class ChildAdapter extends ArrayAdapter<User> {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
             avatarView.setImageBitmap(bitmap);
         } catch (IOException e) {
-            // TODO: remove
-            avatarView.setImageResource(R.drawable.user_avatar);
         }
         */
         TextView nameView = (TextView) rowView.findViewById(R.id.name);

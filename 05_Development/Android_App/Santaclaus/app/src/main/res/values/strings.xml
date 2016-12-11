@@ -17,6 +17,7 @@
     <string name="signup_address">Address</string>
     <string name="signup_avatar">Address</string>
     <string name="signup_ok_button">SignUp</string>
+    <string name="signup_upload_msg">Upload Success!</string>
 
     <!-- Message -->
     <string name="message_title">Message</string>

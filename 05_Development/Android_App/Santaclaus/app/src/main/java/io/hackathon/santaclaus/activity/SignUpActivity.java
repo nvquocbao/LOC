@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,10 +26,6 @@ import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadStatusDelegate;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,15 +33,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
+import io.hackathon.santaclaus.util.CheckLoginTask;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.SingleUploadBroadcastReceiver;
 import io.hackathon.santaclaus.util.Utils;
 
-public class SignUpActivity extends AppCompatActivity { // implements SingleUploadBroadcastReceiver.Delegate {
+public class SignUpActivity extends AppCompatActivity {
 
     private Button buttonChoose;
     private Button buttonUpload;
@@ -61,9 +57,7 @@ public class SignUpActivity extends AppCompatActivity { // implements SingleUplo
     // Uri to store the image uri
     private Uri filePath;
 
-    private final SingleUploadBroadcastReceiver uploadReceiver =
-            new SingleUploadBroadcastReceiver();
-
+    private String avatarPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,18 +83,6 @@ public class SignUpActivity extends AppCompatActivity { // implements SingleUplo
                 uploadMultipart();
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        uploadReceiver.register(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        uploadReceiver.unregister(this);
     }
 
     /*
@@ -143,9 +125,16 @@ public class SignUpActivity extends AppCompatActivity { // implements SingleUplo
                             // your code here
                             // if you have mapped your server response to a POJO, you can easily get it:
                             // YourClass obj = new Gson().fromJson(serverResponse.getBodyAsString(), YourClass.class);
-                                String aaa = serverResponse.getBodyAsString();
-                                Log.v("AAA", "AAAA");
-
+                            String json = serverResponse.getBodyAsString();
+                            Gson gson = new Gson();
+                            Type resultType = new TypeToken<Result>() {}.getType();
+                            Result result = gson.fromJson(json, resultType);
+                            avatarPath = (String) result.getReturnObject();
+//                            String fileName = avatarPath.substring(avatarPath.lastIndexOf('/') + 1);
+//                            TextView editTextNameView = (TextView) findViewById(R.id.editTextName);
+//                            editTextNameView.setText(fileName);
+                            Toast.makeText(getApplicationContext(), getString(R.string.signup_upload_msg),
+                                    Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -283,10 +272,7 @@ public class SignUpActivity extends AppCompatActivity { // implements SingleUplo
         TextView addressView = (TextView) findViewById(R.id.address);
         String email = emailView.getText().toString();
         String password = passwordView.getText().toString();
-        try {
-            password = Utils.encrypt(password);
-        } catch (Exception e) {
-        }
+        password = Utils.cryptWithMD5(password);
         String name = nameView.getText().toString();
         String address = addressView.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -306,30 +292,23 @@ public class SignUpActivity extends AppCompatActivity { // implements SingleUplo
         user.setName(name);
         user.setBirthday(birthday);
         user.setAddress(address);
-        // TODO: upload image
-//        user.setAvatarPath(filePath.toString());
-        user.setAvatarPath(null);
+        user.setAvatarPath(avatarPath);
         user.setType(type);
         final Gson gson = new Gson();
         final String user_string = gson.toJson(user);
 
         // Call API
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try  {
-                    String result_string = Utils.makePOSTRequest(Constants.CREATE_USER_URL, user_string);
-                    Type resultType = new TypeToken<Result>() {}.getType();
-                    Result result = gson.fromJson(result_string, resultType);
-                    if (Constants.INSERT_RESULT_CODE_SUCCESS != result.getResultCode()) {
-                        return;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+        String result_string = "";
+        try {
+            result_string = new CheckLoginTask().execute(user_string).get();
+        } catch (InterruptedException e) {
+        } catch (ExecutionException e) {
+        }
+        Type resultType = new TypeToken<Result>() {}.getType();
+        Result result = gson.fromJson(result_string, resultType);
+        if (Constants.INSERT_RESULT_CODE_SUCCESS != result.getResultCode()) {
+            return;
+        }
 
         // Go to next page
         if (Constants.USER_TYPE_CHILD == type) {
