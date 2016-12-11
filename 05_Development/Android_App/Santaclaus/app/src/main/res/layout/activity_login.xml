@@ -28,7 +28,7 @@
         <EditText
             android:id="@+id/email"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100px"
             android:hint="you@example.com"
             android:background="@drawable/back"
             android:inputType="textEmailAddress" />
@@ -43,9 +43,10 @@
 
         <EditText
             android:id="@+id/password"
+            android:layout_marginTop="20px"
             android:inputType="textPassword"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100px"
             android:hint="password"
             android:background="@drawable/back"/>
 
