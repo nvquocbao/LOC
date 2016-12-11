@@ -146,8 +146,8 @@ public class MessageActivity extends AppCompatActivity {
             return;
         }
         // Success
-        Toast.makeText(getApplicationContext(), getString(R.string.message_save_msg),
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), getString(R.string.message_save_msg),
+//                Toast.LENGTH_LONG).show();
         messageView.setText("");
         setListView();
     }
