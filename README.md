@@ -84,9 +84,10 @@ mysql -h loc-internet.mysql.japan.rds.aliyuncs.com -P 3306 -u loc_user -ploc@121
 # 利用するオープンソースライブラリ一覧
 
 |ライブラリ名|用途|配置場所若しくは依存性管理ファイル|URL|
-|Hibernate|For Data Access Object|---|http://hibernate.org/orm/|
-|Jersey|For Rest Web Service|---|https://jersey.java.net/|
-|Jackson|For JSON encode|---|https://github.com/FasterXML/jackson|
+|---|---|---|---|
+|Hibernate|For Data Access Object|WebContent\WEB-INF\lib|http://hibernate.org/orm/|
+|Jersey|For Rest Web Service|WebContent\WEB-INF\lib|https://jersey.java.net/|
+|Jackson|For JSON encode|WebContent\WEB-INF\lib|https://github.com/FasterXML/jackson|
 
 
 ## Reference
