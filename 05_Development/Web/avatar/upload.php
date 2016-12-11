@@ -36,7 +36,7 @@
 		 $file_name = 'myfile_'.date('m-d-Y_hia');
 		 
 		 //file url to store in the database 
-		 $file_url = $upload_url . $file_name . '.' . $extension;
+	//	 $file_url = $upload_url . $file_name . '.' . $extension;
 		 
 		 //file path to upload in the server 
 		 $file_path = $upload_path . $file_name . '.'. $extension; 
@@ -47,7 +47,7 @@
 			 move_uploaded_file($_FILES['image']['tmp_name'],$file_path);
 			 //filling response array with values 
 			 $response['resultCode'] = 0; 
-			 $response['returnObject'] = $file_url;
+			 $response['returnObject'] = $file_name;
 		 }catch(Exception $e){
 			 $response['resultCode']=1;
 			 $response['message']=$e->getMessage();
