@@ -85,7 +85,7 @@
             android:id="@+id/birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
             android:layout_marginLeft="15px"
             android:inputType="date" />
     </LinearLayout>
@@ -101,6 +101,7 @@
 
         <EditText
             android:id="@+id/address"
+            android:ems="15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
