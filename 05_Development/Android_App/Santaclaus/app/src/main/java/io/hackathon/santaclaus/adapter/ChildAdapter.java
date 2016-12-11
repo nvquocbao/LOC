@@ -2,6 +2,7 @@ package io.hackathon.santaclaus.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.model.User;
+import io.hackathon.santaclaus.util.Constants;
 
 /**
  * Created by trinhnt on 2016/12/10.
@@ -38,14 +40,14 @@ public class ChildAdapter extends ArrayAdapter<User> {
         final View rowView = inflater.inflate(R.layout.child_list, parent, false);
         User user = userList.get(position);
         ImageView avatarView = (ImageView) rowView.findViewById(R.id.avatar);
-        /*
-        Uri uri = Uri.parse(user.getAvatarPath());
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-            avatarView.setImageBitmap(bitmap);
-        } catch (IOException e) {
+        if (null != user.getAvatarPath()) {
+            Uri uri = Uri.parse(Constants.AVATAR_SERVER_URL + user.getAvatarPath());
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                avatarView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+            }
         }
-        */
         TextView nameView = (TextView) rowView.findViewById(R.id.name);
         nameView.setText(user.getName());
         return rowView;

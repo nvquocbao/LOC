@@ -7,11 +7,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.adapter.MessageAdapter;
 import io.hackathon.santaclaus.model.Message;
 import io.hackathon.santaclaus.model.User;
+import io.hackathon.santaclaus.util.Constants;
+import io.hackathon.santaclaus.util.GetRequestTask;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -21,9 +24,19 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
 
         Intent intent = getIntent();
-        String childId = "";
+        String parentId = "";
         if (null != intent) {
-            childId = intent.getStringExtra("childId");
+            parentId = intent.getStringExtra("parentId");
+        }
+
+        // Call API
+//        String url = Constants.GET_MESSAGE_LIST_URL + parentId + childId;
+        String url = Constants.GET_MESSAGE_LIST_URL + "";
+        String result_str = "";
+        try {
+            result_str = new GetRequestTask().execute(url).get();
+        } catch (InterruptedException e) {
+        } catch (ExecutionException e) {
         }
 
         // Init listView

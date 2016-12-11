@@ -53,6 +53,7 @@ public class Utils {
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url);
+            httpGet.getParams().setParameter("http.protocol.content-charset", "UTF-8");
 //            httpGet.getParams().setParameter("parentId", parentId);
             HttpResponse httpResponse = httpClient.execute(httpGet);
             HttpEntity httpEntity = httpResponse.getEntity();

@@ -7,18 +7,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import io.hackathon.santaclaus.R;
 import io.hackathon.santaclaus.adapter.ChildAdapter;
 import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
-import io.hackathon.santaclaus.util.Utils;
+import io.hackathon.santaclaus.util.GetRequestTask;
 
 public class ChildActivity extends AppCompatActivity {
 
@@ -27,28 +31,27 @@ public class ChildActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
 
-
         // Call API
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try  {
-                    String json = Utils.makeGETRequest(Constants.GET_CHILD_LIST_URL + "1");
-                    String aaa = "1";
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+        String url = Constants.GET_CHILD_LIST_URL + "36";
+        String result_str = "";
+        try {
+            result_str = new GetRequestTask().execute(url).get();
+        } catch (InterruptedException e) {
+        } catch (ExecutionException e) {
+        }
+        Gson gson = new Gson();
+        Type resultType = new TypeToken<Result>() {}.getType();
+        Result resultObject = gson.fromJson(result_str, resultType);
+        Type userType = new TypeToken<List<User>>() {}.getType();
+        final List<User> userList = gson.fromJson(resultObject.getReturnObject().toString(), userType);
 
         // Init listView
-        final List<User> userList = new ArrayList<User>();
-        for (int i = 1; i < 3; i++) {
-            User user = new User();
-            user.setName("Name" + i);
-            userList.add(user);
-        }
+//        final List<User> userList = new ArrayList<User>();
+//        for (int i = 1; i < 3; i++) {
+//            User user = new User();
+//            user.setName("Name" + i);
+//            userList.add(user);
+//        }
         ListView listView = (ListView) findViewById(R.id.childList);
         ChildAdapter userAdapter = new ChildAdapter(this, userList);
         listView.setAdapter(userAdapter);

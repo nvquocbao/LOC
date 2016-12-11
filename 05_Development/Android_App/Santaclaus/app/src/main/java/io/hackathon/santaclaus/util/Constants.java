@@ -14,6 +14,8 @@ public class Constants {
 
     public final static int GROWN_UP_AGE = 20;
 
+    public static final String AVATAR_SERVER_URL = "http://47.91.16.210/uploads/";
+
     public static final String UPLOAD_URL = "http://47.91.16.210/upload.php";
 
     public static final String CREATE_USER_URL = "http://47.91.16.210:8080/LOCWS/rest/user/create";
@@ -23,4 +25,6 @@ public class Constants {
     public static final String GET_CHILD_LIST_URL = "http://47.91.16.210:8080/LOCWS/rest/user/getAllChild/";
 
     public static final String CREATE_MESSAGE_URL = "http://47.91.16.210:8080/LOCWS/rest/message/create";
+
+    public static final String GET_MESSAGE_LIST_URL = "http://47.91.16.210:8080/LOCWS/rest/message/list/";
 }

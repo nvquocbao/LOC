@@ -40,6 +40,7 @@ import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.CheckLoginTask;
 import io.hackathon.santaclaus.util.Constants;
+import io.hackathon.santaclaus.util.CreateUserTask;
 import io.hackathon.santaclaus.util.Utils;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -300,7 +301,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Call API
         String result_string = "";
         try {
-            result_string = new CheckLoginTask().execute(user_string).get();
+            result_string = new CreateUserTask().execute(user_string).get();
         } catch (InterruptedException e) {
         } catch (ExecutionException e) {
         }
@@ -310,10 +311,15 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        // Get generated userID
+        Type userType = new TypeToken<User>() {}.getType();
+        User resultUser = gson.fromJson(result.getReturnObject().toString(), userType);
+
         // Go to next page
         if (Constants.USER_TYPE_CHILD == type) {
             // Go to Message
             Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("parentId", resultUser.getId()+"");
             startActivity(intent);
         } else if (Constants.USER_TYPE_PARENT == type) {
             // Go to Child
