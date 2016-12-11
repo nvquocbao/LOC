@@ -125,9 +125,10 @@ public class UserResource {
 		Output output = null;
 		try {
 			UserDAO.insert(user);
-			output = new Output(Common.RESULT_OK);
+			user = UserDAO.login(user.getEmail(), user.getPassword());
+			output = new Output(Common.RESULT_OK, user);
 		} catch (ClassNotFoundException | SQLException e) {
-			output = new Output(Common.RESULT_OK);
+			output = new Output(Common.RESULT_ERROR);
 			e.printStackTrace();
 		}
 		return output;
@@ -143,7 +144,7 @@ public class UserResource {
 			UserDAO.insert(user);
 			output = new Output(Common.RESULT_OK);
 		} catch (ClassNotFoundException | SQLException e) {
-			output = new Output(Common.RESULT_OK);
+			output = new Output(Common.RESULT_ERROR);
 			e.printStackTrace();
 		}
 		return output;
