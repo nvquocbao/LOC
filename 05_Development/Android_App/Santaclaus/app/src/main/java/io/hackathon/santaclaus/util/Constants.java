@@ -12,6 +12,10 @@ public class Constants {
 
     public final static int USER_TYPE_PARENT = 1;
 
+    public final static int IS_CHILD = 1;
+
+    public final static int IS_PARENT = 0;
+
     public final static int GROWN_UP_AGE = 20;
 
     public static final String AVATAR_SERVER_URL = "http://47.91.16.210/uploads/";

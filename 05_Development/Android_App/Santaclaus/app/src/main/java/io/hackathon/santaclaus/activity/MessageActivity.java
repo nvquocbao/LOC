@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +21,6 @@ import io.hackathon.santaclaus.model.Result;
 import io.hackathon.santaclaus.model.User;
 import io.hackathon.santaclaus.util.Constants;
 import io.hackathon.santaclaus.util.CreateMessageTask;
-import io.hackathon.santaclaus.util.CreateUserTask;
 import io.hackathon.santaclaus.util.GetRequestTask;
 import io.hackathon.santaclaus.util.Utils;
 
@@ -71,11 +69,11 @@ public class MessageActivity extends AppCompatActivity {
         // Init listView
         for (int i = 0; i < messageList.size(); i++) {
             Message msg = messageList.get(i);
-            if (msg.getIsChild() == 0) { // Parent
+            if (msg.getIsChild() == Constants.IS_PARENT) { // Parent
                 User user = new User();
                 user.setName(parentName);
                 msg.setUser(user);
-            } else if (msg.getIsChild() == 1) { // Child
+            } else if (msg.getIsChild() == Constants.IS_CHILD) { // Child
                 User user = new User();
                 user.setName(childName);
                 msg.setUser(user);
@@ -97,6 +95,11 @@ public class MessageActivity extends AppCompatActivity {
         msg.setParentId(Utils.getIntegerValue(parentId));
         msg.setChildId(Utils.getIntegerValue(childId));
         msg.setContent(messageView.getText().toString());
+        if (null != parentId) {
+            msg.setIsChild(Constants.IS_PARENT);
+        } else {
+            msg.setIsChild(Constants.IS_CHILD);
+        }
         final Gson gson = new Gson();
         final String message_string = gson.toJson(msg);
 
