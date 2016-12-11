@@ -40,6 +40,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         nameView.setText(message.getUser().getName());
         TextView contentView = (TextView) rowView.findViewById(R.id.content);
         contentView.setText(message.getContent());
+
+
         return rowView;
     }
 }

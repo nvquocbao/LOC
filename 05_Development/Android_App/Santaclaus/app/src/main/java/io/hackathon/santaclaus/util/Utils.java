@@ -12,6 +12,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -56,8 +57,9 @@ public class Utils {
             httpGet.getParams().setParameter("http.protocol.content-charset", "UTF-8");
 //            httpGet.getParams().setParameter("parentId", parentId);
             HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
+            response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+//            HttpEntity httpEntity = httpResponse.getEntity();
+//            response = EntityUtils.toString(httpEntity);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -88,8 +90,9 @@ public class Utils {
             // 6. set httpPost Entity
             httpPost.setEntity(se);
             HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
+            response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+//            HttpEntity httpEntity = httpResponse.getEntity();
+//            response = EntityUtils.toString(httpEntity);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {

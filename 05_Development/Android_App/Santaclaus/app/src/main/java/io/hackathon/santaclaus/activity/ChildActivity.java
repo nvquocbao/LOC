@@ -26,10 +26,20 @@ import io.hackathon.santaclaus.util.GetRequestTask;
 
 public class ChildActivity extends AppCompatActivity {
 
+    String parentId = "";
+    String parentName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
+
+        // Get params
+        Intent intent = getIntent();
+        if (null != intent) {
+            parentId = intent.getStringExtra("parentId");
+            parentName = intent.getStringExtra("parentName");
+        }
 
         // Call API
         String url = Constants.GET_CHILD_LIST_URL + "36";
@@ -62,7 +72,10 @@ public class ChildActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selectedUser = userList.get(position);
                 Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                intent.putExtra("parentId", parentId);
+                intent.putExtra("parentName", parentName);
                 intent.putExtra("childId", selectedUser.getId() + "");
+                intent.putExtra("childName", selectedUser.getName());
                 startActivity(intent);
             }
         });

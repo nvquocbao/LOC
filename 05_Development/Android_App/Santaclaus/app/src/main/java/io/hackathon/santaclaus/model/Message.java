@@ -23,6 +23,8 @@ public class Message implements Serializable {
 
     private Date updateDate;
 
+    private int isChild;
+
     public int getId() {
         return id;
     }
@@ -77,5 +79,13 @@ public class Message implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public int getIsChild() {
+        return isChild;
+    }
+
+    public void setIsChild(int isChild) {
+        this.isChild = isChild;
     }
 }

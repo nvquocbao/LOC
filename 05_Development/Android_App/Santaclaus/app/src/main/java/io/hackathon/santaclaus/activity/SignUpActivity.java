@@ -320,6 +320,7 @@ public class SignUpActivity extends AppCompatActivity {
             // Go to Message
             Intent intent = new Intent(this, MessageActivity.class);
             intent.putExtra("parentId", resultUser.getId()+"");
+            intent.putExtra("parentName", resultUser.getName());
             startActivity(intent);
         } else if (Constants.USER_TYPE_PARENT == type) {
             // Go to Child

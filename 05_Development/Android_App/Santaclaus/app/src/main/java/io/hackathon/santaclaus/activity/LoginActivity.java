@@ -55,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             } else if (Constants.USER_TYPE_PARENT == user.getType()) {
                 // Go to Child
                 Intent intent = new Intent(this, ChildActivity.class);
+                intent.putExtra("parentId", user.getId()+"");
+                intent.putExtra("parentName", user.getName());
                 startActivity(intent);
             }
         } else {
@@ -88,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         User resultObject = gson.fromJson(result_str, userType);
         user.setId(resultObject.getId());
         user.setType(resultObject.getType());
+        user.setName(resultObject.getName());
         return user;
     }
 
