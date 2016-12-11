@@ -92,7 +92,21 @@ public class MessageActivity extends AppCompatActivity {
             return;
         }
         Message msg = new Message();
-        if (null != parentId) {
+        if (null == parentId) {
+            // Call API
+            String url = Constants.GET_PARENT_URL + childId;
+            String result_str = "";
+            try {
+                result_str = new GetRequestTask().execute(url).get();
+            } catch (InterruptedException e) {
+            } catch (ExecutionException e) {
+            }
+            Gson gson = new Gson();
+            Type resultType = new TypeToken<Result>() {}.getType();
+            Result resultObject = gson.fromJson(result_str, resultType);
+            Type userType = new TypeToken<User>() {}.getType();
+            final User resultUser = gson.fromJson(resultObject.getReturnObject().toString(), userType);
+            parentId = resultUser.getId() + "";
             msg.setParentId(Utils.getIntegerValue(parentId));
         }
         msg.setChildId(Utils.getIntegerValue(childId));

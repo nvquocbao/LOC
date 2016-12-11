@@ -31,4 +31,6 @@ public class Constants {
     public static final String CREATE_MESSAGE_URL = "http://47.91.16.210:8080/LOCWS/rest/message/create";
 
     public static final String GET_MESSAGE_LIST_URL = "http://47.91.16.210:8080/LOCWS/rest/message/list/";
+
+    public static final String GET_PARENT_URL = "http://47.91.16.210:8080/LOCWS/rest/user/getParent/";
 }
